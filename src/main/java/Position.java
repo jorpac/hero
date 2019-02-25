@@ -2,7 +2,7 @@ public class Position {
     private int x, y;
 
     public Position(int x, int i) {
-        setY(y);
+        setY(i);
         setX(x);
     }
 
