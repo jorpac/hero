@@ -2,7 +2,7 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.screen.Screen;
 
 public class Hero {
-    private Position position = new Position(10, 10);
+    private Position position = new Position(0, 0);
 
     public Hero(int i, int i1) {
         setX(i);
@@ -41,9 +41,6 @@ public class Hero {
         return new Position(position.getX() + 1, position.getY());
     }
 
-    public void draw(Screen screen) {
-        screen.setCharacter(getX(), getY(), new TextCharacter('X'));
-    }
 
     public void setPosition(Position position) {
         setY(position.getY());

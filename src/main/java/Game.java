@@ -10,9 +10,8 @@ import java.io.IOException;
 
 public class Game {
     Screen screen;
-    private int x = 10;
-    private int y = 10;
-    Hero hero = new Hero(10, 10);
+    Hero hero = new Hero(0, 0);
+    Arena arena = new Arena(20, 60);
     com.googlecode.lanterna.input.KeyStroke key;
 
     public Game() {
@@ -31,7 +30,7 @@ public class Game {
     private void draw() {
         try {
             screen.clear();
-            hero.draw(screen);
+            arena.draw(screen);
             screen.refresh();
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,32 +38,13 @@ public class Game {
     }
 
     private void processKey(KeyStroke key) {
-        System.out.println(key);
-        switch (key.getKeyType()) {
-            case ArrowLeft:
-                moveHero(hero.moveLeft());
-                break;
-            case ArrowRight:
-                moveHero(hero.moveRight());
-                break;
-            case ArrowUp:
-                moveHero(hero.moveUp());
-                break;
-            case ArrowDown:
-                moveHero(hero.moveDown());
-                break;
-            case Character:
-                if(key.getCharacter() == 'q') {
-                    try {
-                        screen.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-                break;
+        if(!arena.processKey(key)) {
+            try {
+                screen.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     public void run() {
@@ -82,7 +62,4 @@ public class Game {
         }
     }
 
-    public void  moveHero(Position position) {
-        hero.setPosition(position);
-    }
 }
