@@ -31,7 +31,7 @@ public class Game {
     private void draw() {
         try {
             screen.clear();
-            screen.setCharacter(hero.getX(), hero.getY(), new TextCharacter('X'));
+            hero.draw(screen);
             screen.refresh();
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,16 +42,16 @@ public class Game {
         System.out.println(key);
         switch (key.getKeyType()) {
             case ArrowLeft:
-                hero.moveLeft();
+                moveHero(hero.moveLeft());
                 break;
             case ArrowRight:
-                hero.moveRight();
+                moveHero(hero.moveRight());
                 break;
             case ArrowUp:
-                hero.moveUp();
+                moveHero(hero.moveUp());
                 break;
             case ArrowDown:
-                hero.moveDown();
+                moveHero(hero.moveDown());
                 break;
             case Character:
                 if(key.getCharacter() == 'q') {
@@ -82,4 +82,7 @@ public class Game {
         }
     }
 
+    public void  moveHero(Position position) {
+        hero.setPosition(position);
+    }
 }

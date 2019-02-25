@@ -1,5 +1,8 @@
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.screen.Screen;
+
 public class Hero {
-    private int x, y;
+    private Position position;
 
     public Hero(int i, int i1) {
         setX(i);
@@ -7,30 +10,43 @@ public class Hero {
     }
 
     public int getY() {
-        return y;
+        return position.getY();
     }
 
     public void setY(int y) {
-        this.y = y;
+        position.setY(y);
     }
 
     public int getX() {
-        return x;
+        return position.getX();
     }
 
     public void setX(int x) {
-        this.x = x;
+        position.setX(x);
     }
-    public void moveUp(){
-        setY(y-1);
+
+    public Position moveUp() {
+        return new Position(position.getX(), position.getY() - 1);
     }
-    public  void moveDown(){
-        setY(y+1);
+
+    public Position moveDown() {
+        return new Position(position.getX(), position.getY() + 1);
     }
-    public void moveLeft(){
-        setX(x-1);
+
+    public Position moveLeft() {
+        return new Position(position.getX() - 1, position.getY());
     }
-    public void moveRight(){
-        setX(x+1);
+
+    public Position moveRight() {
+        return new Position(position.getX() + 1, position.getY());
+    }
+
+    public void draw(Screen screen) {
+        screen.setCharacter(getX(), getY(), new TextCharacter('X'));
+    }
+
+    public void setPosition(Position position) {
+        setY(position.getY());
+        setX(position.getX());
     }
 }
